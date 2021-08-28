@@ -27,7 +27,7 @@ class EmailPasswordSignInModel with EmailAndPasswordValidators, ChangeNotifier {
 
   String email;
   String password;
-  String allowedDomain;
+  String? allowedDomain;
   EmailPasswordSignInFormType formType;
   bool isLoading;
   bool submitted;
