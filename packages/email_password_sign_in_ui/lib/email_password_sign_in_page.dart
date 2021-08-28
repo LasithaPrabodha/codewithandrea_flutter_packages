@@ -6,7 +6,7 @@ class EmailPasswordSignInPage extends StatefulWidget {
   final VoidCallback? onSignedIn;
 
   factory EmailPasswordSignInPage.withFirebaseAuth(
-      FirebaseAuth firebaseAuth, VoidCallback? onSignedIn, String? allowedDomain) {
+      {required FirebaseAuth firebaseAuth, VoidCallback? onSignedIn, String allowedDomain = ''}) {
     return EmailPasswordSignInPage(
       model: EmailPasswordSignInModel(firebaseAuth: firebaseAuth, allowedDomain: allowedDomain),
       onSignedIn: onSignedIn,
