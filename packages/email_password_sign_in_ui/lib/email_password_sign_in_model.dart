@@ -27,7 +27,7 @@ class EmailPasswordSignInModel with EmailAndPasswordValidators, ChangeNotifier {
 
   String email;
   String password;
-  String? allowedDomain;
+  String allowedDomain;
   EmailPasswordSignInFormType formType;
   bool isLoading;
   bool submitted;
@@ -46,7 +46,7 @@ class EmailPasswordSignInModel with EmailAndPasswordValidators, ChangeNotifier {
           break;
         case EmailPasswordSignInFormType.register:
           if (allowedDomain != '' && !email.toLowerCase().endsWith(allowedDomain)) {
-            throw "Sorry... Only creatives can sign up.";
+            throw 'Sorry... Only creatives can sign up.';
           }
           await firebaseAuth.createUserWithEmailAndPassword(
               email: email, password: password);

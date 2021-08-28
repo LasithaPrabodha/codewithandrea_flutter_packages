@@ -1,14 +1,12 @@
 part of email_password_sign_in_ui;
 
 class EmailPasswordSignInPage extends StatefulWidget {
-  const EmailPasswordSignInPage(
-      {Key? key, required this.model, this.onSignedIn})
-      : super(key: key);
+  const EmailPasswordSignInPage({Key? key, required this.model, this.onSignedIn}) : super(key: key);
   final EmailPasswordSignInModel model;
   final VoidCallback? onSignedIn;
 
-  factory EmailPasswordSignInPage.withFirebaseAuth(FirebaseAuth firebaseAuth, String? allowedDomain,
-      {VoidCallback? onSignedIn}) {
+  factory EmailPasswordSignInPage.withFirebaseAuth(
+      FirebaseAuth firebaseAuth, VoidCallback? onSignedIn, String? allowedDomain) {
     return EmailPasswordSignInPage(
       model: EmailPasswordSignInModel(firebaseAuth: firebaseAuth, allowedDomain: allowedDomain),
       onSignedIn: onSignedIn,
@@ -16,8 +14,7 @@ class EmailPasswordSignInPage extends StatefulWidget {
   }
 
   @override
-  _EmailPasswordSignInPageState createState() =>
-      _EmailPasswordSignInPageState();
+  _EmailPasswordSignInPageState createState() => _EmailPasswordSignInPageState();
 }
 
 class _EmailPasswordSignInPageState extends State<EmailPasswordSignInPage> {
@@ -135,15 +132,13 @@ class _EmailPasswordSignInPageState extends State<EmailPasswordSignInPage> {
     return FocusScope(
       node: _node,
       child: Form(
-        onChanged: () => model.updateWith(
-            email: _emailController.text, password: _passwordController.text),
+        onChanged: () => model.updateWith(email: _emailController.text, password: _passwordController.text),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             const SizedBox(height: 8.0),
             _buildEmailField(),
-            if (model.formType !=
-                EmailPasswordSignInFormType.forgotPassword) ...<Widget>[
+            if (model.formType != EmailPasswordSignInFormType.forgotPassword) ...<Widget>[
               const SizedBox(height: 8.0),
               _buildPasswordField(),
             ],
@@ -158,19 +153,13 @@ class _EmailPasswordSignInPageState extends State<EmailPasswordSignInPage> {
             FlatButton(
               key: const Key('secondary-button'),
               child: Text(model.secondaryButtonText),
-              onPressed: model.isLoading
-                  ? null
-                  : () => _updateFormType(model.secondaryActionFormType),
+              onPressed: model.isLoading ? null : () => _updateFormType(model.secondaryActionFormType),
             ),
             if (model.formType == EmailPasswordSignInFormType.signIn)
               FlatButton(
                 key: const Key('tertiary-button'),
-                child: const Text(
-                    EmailPasswordSignInStrings.forgotPasswordQuestion),
-                onPressed: model.isLoading
-                    ? null
-                    : () => _updateFormType(
-                        EmailPasswordSignInFormType.forgotPassword),
+                child: const Text(EmailPasswordSignInStrings.forgotPasswordQuestion),
+                onPressed: model.isLoading ? null : () => _updateFormType(EmailPasswordSignInFormType.forgotPassword),
               ),
           ],
         ),
